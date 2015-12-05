@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SignatureJS Example</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="src/jquery-1.11.3.min.js"></script>
+    <script src="src/signature.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Signature plugin example</h3>
+        <div class='sign-container'></div>
+        <br /><br /><br /><br />
+        <div class='test'></div>
+	</div>
+
+    <script>
+        $(document).ready(function(){
+            $(".sign-container").signatureJS({
+                height       : 160,
+                width        : 400,
+                marker_color : "#000000",
+                marker_size  : 2,
+                sign_data    : function (data_url) {
+                    // to replace the signature canvas with signature image
+                    this.selector.empty().append($('<img>', {src: data_url}));
+                } 
+            });
+            $(".test").signatureJS({
+                height       : 200,
+                width        : 600,
+                //marker_color : "#000000",
+                //marker_size  : 2,
+                sign_data    : function (data_url) {
+                    // to replace the signature canvas with signature image
+                    this.selector.empty().append($('<img>', {src: data_url}));
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

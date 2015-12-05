@@ -1,0 +1,16 @@
+.sjs-wrap {
+    cursor: default;
+    border: 2px solid #CEC3C3;
+    display: inline-block;
+}
+.sjs-butn-wrap {
+    float: right;
+    font-family: monospace;
+    margin: -20px 5px 0 0;
+    position: relative;
+    z-index: 1000;
+}
+.sjs-butn {
+    cursor: pointer;
+    margin-left: 10px;    
+}
