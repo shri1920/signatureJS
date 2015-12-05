@@ -25,7 +25,7 @@ Download the latest release from GitHub [releases page](https://github.com/shri1
 To set the height of the interface (Signature canvas). If not set canvas will be set with a default height (160).
 
 #### width
-To sTo set the width of the interface (Signature canvas). If not set canvas will be set with a default width (400).
+To set the width of the interface (Signature canvas). If not set canvas will be set with a default width (400).
 
 #### marker_color
 To set the color of marker. If not set signature will be drawn with default (Black) color.
