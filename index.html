@@ -4,17 +4,20 @@
 <head>
     <title>SignatureJS Example</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/signatureJS.css" />
     <script src="src/jquery-1.11.3.min.js"></script>
-    <script src="src/signature.js"></script>
+    <script src="src/signatureJS.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <h3>Signature plugin example</h3>
+        <p class='intro'> SignatureJS is jQuery plugin built on top of HTML5 Canvas, 
+            A front end tool for signature. It works with both desktop and mobile browser </p>
+        
+        <h4>Signature plugin example</h4>
         <div class='sign-container'></div>
-        <br /><br /><br /><br />
-        <h3>Signature plugin with custom buttons</h3>
+        <br />
+        <h4>Signature plugin with custom buttons</h4>
         <div class='test'></div>
         <button id = 'save'>Save</button> <button id = 'clear'>Clear</button>
 	</div>
@@ -22,21 +25,21 @@
     <script>
         $(document).ready(function(){
             $(".sign-container").signatureJS({
-                height       : 160,
-                width        : 400,
-                marker_color : "#000000",
-                marker_size  : 2,
-                sign_data    : function (data_url) {
+                "height"       : 160,
+                "width"        : 400,
+                "marker_color" : "#000000",
+                "marker_size"  : 2,
+                "sign_data"    : function (data_url) {
                     // to replace the signature canvas with signature image
                     this.selector.empty().append($('<img>', {src: data_url}));
                 } 
             });
             $(".test").signatureJS({
-                height       : 200,
-                width        : 600,
-                marker_color : "#000000",
-                marker_size  : 2,
-                'buttons':  {
+                "height"       : 200,
+                "width"        : 600,
+                "marker_color" : "#000000",
+                "marker_size"  : 2,
+                "buttons"      : {
                     "save": {
                         selector: $("#save"),
                         callback: function (data_url) {
