@@ -14,7 +14,9 @@
         <h3>Signature plugin example</h3>
         <div class='sign-container'></div>
         <br /><br /><br /><br />
+        <h3>Signature plugin with custom buttons</h3>
         <div class='test'></div>
+        <button id = 'save'>Save</button> <button id = 'clear'>Clear</button>
 	</div>
 
     <script>
@@ -32,11 +34,22 @@
             $(".test").signatureJS({
                 height       : 200,
                 width        : 600,
-                //marker_color : "#000000",
-                //marker_size  : 2,
-                sign_data    : function (data_url) {
-                    // to replace the signature canvas with signature image
-                    this.selector.empty().append($('<img>', {src: data_url}));
+                marker_color : "#000000",
+                marker_size  : 2,
+                'buttons':  {
+                    "save": {
+                        selector: $("#save"),
+                        callback: function (data_url) {
+                            // To dwonload the image
+                            /*var anch_tag  = document.createElement("a");
+                            anch_tag.href = data_url;
+                            anch_tag.download = "test1.png";
+                            anch_tag.click();*/
+                        }
+                    },
+                    "clear": {
+                        selector: $('#clear')
+                    }
                 }
             });
         });

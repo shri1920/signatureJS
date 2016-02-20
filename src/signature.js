@@ -59,9 +59,15 @@
         var self = this, context = self.options.context;
         if (self.options.is_signed) {
             // Hide the clear and save buttons if signature is done.
-            element.parents(".sjs-butn-wrap").hide();
-            if (self.options.sign_data && typeof self.options.sign_data === "function") {
-                self.options.sign_data(context.canvas.toDataURL());
+            //element.parents(".sjs-butn-wrap").hide();
+             if (self.options.buttons && self.options.buttons.save && self.options.buttons.save.callback) {
+                if (typeof self.options.buttons.save.callback === "function") {
+                    self.options.buttons.save.callback(context.canvas.toDataURL());
+                }
+            } else {
+                if (self.options.sign_data && typeof self.options.sign_data === "function") {
+                    self.options.sign_data(context.canvas.toDataURL());
+                }
             }
         }
     };
@@ -164,7 +170,7 @@
         to draw the signature, and bind the required events for the plugin.
     */
     _SignatureJS.init = function (selector) {
-        var self, element, canvas;
+        var self, element, canvas, save, clear;
         element = selector;
         self    = this;
         element.addClass("sjs-wrap");
@@ -175,9 +181,11 @@
         canvas.setAttribute("height", self.options.height || 160);
         // Append created canvas element to the required element.
         element.empty().append(canvas);
-        // Append the button required to say done or clear the canvas.
         element.append(html.no_float);
-        element.append(html.button);
+        // Append the button required to say done or clear the canvas.
+        if (!self.options.buttons) {
+            element.append(html.button);
+        }
         // Select the required element to bind the required events.
         canvas  = $(canvas);
         self.options.context = canvas[0].getContext("2d");
@@ -210,13 +218,27 @@
             self.options.sign = false;
         });
         // Click event to clear the signature canvas.
-        element.find(".sjs-clear").on("click", function () {
-            self.erase();
-        });
+        if (self.options.buttons && self.options.buttons.clear) {
+            clear = self.options.buttons.clear.selector;
+            clear.on("click", function () {
+                self.erase();
+            });
+        } else {
+            element.find(".sjs-clear").on("click", function () {
+                self.erase();
+            });
+        }
         // click event to generate data-url of the image and send it back.
-        element.find(".sjs-done").on("click", function () {
-            self.generateCanvasData($(this));
-        });
+        if (self.options.buttons && self.options.buttons.save) {
+            save = self.options.buttons.save.selector;
+            save.on("click", function () {
+                self.generateCanvasData($(this));
+            });
+        } else {
+            element.find(".sjs-done").on("click", function () {
+                self.generateCanvasData($(this));
+            });
+        }
     };
     /*
         Defining the nwe jQuery plugin signatureJS.
